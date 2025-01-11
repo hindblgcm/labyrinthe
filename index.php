@@ -175,7 +175,7 @@ function displayPlayWithClouds($play, $playerPos, $mousePos)
             } elseif ($mousePos[0] == $rowIndex && $mousePos[1] == $colIndex) {
                 $output .= '🐭';
             } elseif ($cell == 1) {
-                $output .= '🧱';
+                $output .= '🟫';
             } else {
                 $output .= '⬜';
             }
