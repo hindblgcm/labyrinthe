@@ -1,0 +1,145 @@
+/* Style du Header */
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  
+}
+
+header h1 {
+    margin-left: 20px;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    margin-right: 20px;
+    border: 1px solid #fff;
+    padding: 2px 5px;
+    border-radius: 6px;
+}
+
+nav ul li:hover {
+    background: linear-gradient(to right, yellow, #fff 50%);
+    transition: 2s;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+nav ul li a:hover {
+    color: #333;
+}
+
+/* Style du Body */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: yellow;
+}
+
+/* Conteneur Principal */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    margin-top: 20px;
+}
+
+/* Titres */
+.container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2rem;
+    color: #333;
+}
+
+.container h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+/* Paragraphe des règles */
+.container p {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    color: #555;
+}
+
+.container ol,
+.container ul {
+    margin: 0 auto;
+    padding: 0;
+    max-width: 800px;
+    font-size: 1.1rem;
+    list-style-type: none;
+    text-align: left;
+}
+
+.container ol li,
+.container ul li {
+    margin-bottom: 10px;
+}
+
+/* Bouton Retour au Jeu */
+.back-to-game {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.back-to-game .btn {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.back-to-game .btn:hover {
+    background-color: #45a049;
+    cursor: pointer;
+}
+
+/* Style du Footer */
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+   
+    width: 100%;
+    bottom: 0;
+    position: fixed;
+}
+
+/* Adaptation mobile */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 10px;
+    }
+
+    .container h2,
+    .container h3 {
+        font-size: 1.5rem;
+    }
+
+    .container p,
+    .container ol li,
+    .container ul li {
+        font-size: 1rem;
+    }
+}
