@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 $grilles = [
     [
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -9,7 +11,7 @@ $grilles = [
         [0, 1, 0, 0, 1, 0, 1, 0, 1, 0],
         [0, 1, 0, 0, 1, 0, 1, 0, 1, 0],
         [0, 1, 0, 0, 1, 0, 0, 0, 1, 0],
-        [0, 1, 1, 1, 1, 1, 0, 1, 1, 0],
+        [0, 1, 0, 1, 1, 1, 0, 1, 1, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     ],
     [
@@ -42,38 +44,33 @@ $grilles = [
     ]
 ];
 
-// fonction pour obtenir la grille du jeu selon le score 
+$msg = ""; // Ensure $msg is initialized
 
+// Fonction pour obtenir la grille du jeu selon le score 
 function getGameGrid($score)
 {
+    global $msg; // Make $msg accessible inside the function
     if ($score < 5) {
+        $msg = "c'est parti, montre ce que tu sais faire";
         return $GLOBALS['grilles'][0];
-        echo "c'est partie montre ce que tu sais faire";
     } elseif ($score < 10) {
+        $msg = "tu commence a bien te debrouiller";
         return $GLOBALS['grilles'][1];
-        echo " tu commence a bien te debrouiller";
     } else {
+        $msg = "tu es un pro";
         return $GLOBALS['grilles'][2];
-        echo "tu es un pro";
     }
 }
 
-// fonction pour savoir si la souris est dans un cul de sac
-
-
-session_start();
-
-
+$_SESSION['msg'] = $msg;
 
 if (!isset($_SESSION['score'])) {
     $_SESSION['score'] = 0;
 }
 
-
 if (!isset($_SESSION['playerPos'])) {
     $_SESSION['playerPos'] = [1, 1];
 }
-
 
 if (!isset($_SESSION['mousePos'])) {
     $_SESSION['mousePos'] = getRandomAccessiblePosition(getGameGrid($_SESSION['score']), $_SESSION['playerPos']);
@@ -84,8 +81,8 @@ if (isset($_POST['restart'])) {
     header("Location: index.php"); 
     exit;
 }
-// traitement du formulaire
 
+// Traitement du formulaire
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['restart'])) {
     $direction = $_POST['direction'] ?? null;
     $newPlayerPos = movePlayer($_SESSION['playerPos'], $direction, getGameGrid($_SESSION['score']));
@@ -99,8 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['restart'])) {
     }
 }
 
-// fonction pour déplacer le joueur 
-
+// Fonction pour déplacer le joueur 
 function movePlayer($playerPos, $direction, $grid)
 {
     $newPos = $playerPos;
@@ -125,8 +121,8 @@ function movePlayer($playerPos, $direction, $grid)
 
     return $playerPos;
 }
-// fonction pour obtenir une position aléatoire accessible
 
+// Fonction pour obtenir une position aléatoire accessible
 function getRandomAccessiblePosition($grid, $playerPos)
 {
     $accessiblePositions = [];
@@ -140,8 +136,7 @@ function getRandomAccessiblePosition($grid, $playerPos)
     return $accessiblePositions[array_rand($accessiblePositions)];
 }
 
-// fonction pour générer les nuages
-
+// Fonction pour générer les nuages
 function generateClouds($play, $playerPos)
 {
     $clouds = [];
@@ -161,8 +156,8 @@ function generateClouds($play, $playerPos)
 
     return $clouds;
 }
-// fonction pour afficher le jeu et les nuages
 
+// Fonction pour afficher le jeu et les nuages
 function displayPlayWithClouds($play, $playerPos, $mousePos)
 {
     $clouds = generateClouds($play, $playerPos);
@@ -196,7 +191,6 @@ function displayPlayWithClouds($play, $playerPos, $mousePos)
 }
 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -244,6 +238,8 @@ function displayPlayWithClouds($play, $playerPos, $mousePos)
                 <div id="jeu">
                     <?php echo displayPlayWithClouds(getGameGrid($_SESSION['score']), $_SESSION['playerPos'], $_SESSION['mousePos']); ?>
                 </div>
+                
+                <p><?php echo $msg ?> </p>
             </article>
         </section>
     </main>
