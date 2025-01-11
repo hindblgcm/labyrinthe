@@ -44,12 +44,12 @@ $grilles = [
     ]
 ];
 
-$msg = ""; // Ensure $msg is initialized
+$msg = "";
 
-// Fonction pour obtenir la grille du jeu selon le score 
+
 function getGameGrid($score)
 {
-    global $msg; // Make $msg accessible inside the function
+    global $msg; 
     if ($score < 5) {
         $msg = "c'est parti, montre ce que tu sais faire";
         return $GLOBALS['grilles'][0];
@@ -82,7 +82,8 @@ if (isset($_POST['restart'])) {
     exit;
 }
 
-// Traitement du formulaire
+
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['restart'])) {
     $direction = $_POST['direction'] ?? null;
     $newPlayerPos = movePlayer($_SESSION['playerPos'], $direction, getGameGrid($_SESSION['score']));
@@ -96,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['restart'])) {
     }
 }
 
-// Fonction pour déplacer le joueur 
+
 function movePlayer($playerPos, $direction, $grid)
 {
     $newPos = $playerPos;
@@ -122,7 +123,9 @@ function movePlayer($playerPos, $direction, $grid)
     return $playerPos;
 }
 
-// Fonction pour obtenir une position aléatoire accessible
+
+ 
+
 function getRandomAccessiblePosition($grid, $playerPos)
 {
     $accessiblePositions = [];
@@ -136,7 +139,8 @@ function getRandomAccessiblePosition($grid, $playerPos)
     return $accessiblePositions[array_rand($accessiblePositions)];
 }
 
-// Fonction pour générer les nuages
+
+
 function generateClouds($play, $playerPos)
 {
     $clouds = [];
@@ -157,7 +161,7 @@ function generateClouds($play, $playerPos)
     return $clouds;
 }
 
-// Fonction pour afficher le jeu et les nuages
+
 function displayPlayWithClouds($play, $playerPos, $mousePos)
 {
     $clouds = generateClouds($play, $playerPos);
