@@ -247,6 +247,7 @@ function displayPlayWithClouds($play, $playerPos, $mousePos)
     <footer>
         <p>&copy; 2024 Jeu du chat et de la souris. Tous droits réservés.</p>
     </footer>
+    <script src="./assets/js/main.js"></script>
 </body>
 
 </html>
